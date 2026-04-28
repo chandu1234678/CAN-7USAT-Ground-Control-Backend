@@ -13,6 +13,8 @@
 
 ## 📊 Performance Metrics
 
+![Performance Metrics](docs/images/performance-metrics.png)
+
 | Metric | Target | Actual | Status |
 |--------|--------|--------|--------|
 | **Packet Decode Time** | <2ms | ~0.5ms | ✅ **67% faster** |
@@ -45,6 +47,8 @@
 ---
 
 ## 🎯 System Architecture
+
+![System Architecture](docs/images/architecture.png)
 
 ```
 ┌─────────────────┐      900MHz       ┌──────────────────┐
