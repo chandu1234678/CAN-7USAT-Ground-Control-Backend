@@ -5,7 +5,7 @@
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.136-green.svg)](https://fastapi.tiangolo.com/)
-[![Tests](https://img.shields.io/badge/tests-5%2F5%20passing-brightgreen.svg)](backend/tests/)
+[![Tests](https://img.shields.io/badge/tests-23%2F23%20passing-brightgreen.svg)](backend/tests/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
@@ -135,7 +135,66 @@ Total: 46 bytes
 | End-to-end latency | 15 ms | **< 5 ms** |
 | Packet loss | < 1% | **0%** |
 | Data rate | 10 Hz | **10 Hz** |
-| Test coverage | — | **5/5 passing** |
+| Test coverage | — | **23/23 passing** |
+
+---
+
+## Proof & Validation
+
+This repository is not just documented; it is exercised and measured.
+
+| Area | Evidence |
+|------|----------|
+| Backend tests | 23/23 passing in the current local verification run |
+| Frontend tests | 3/3 passing with Vitest |
+| Frontend lint | Clean ESLint run |
+| Frontend build | Successful production build |
+| Backend benchmarks | SVG graphs generated in `docs/images/` |
+
+### Visual Evidence
+
+These screenshots and charts are included directly from the repo so the README doubles as a lightweight report.
+
+| Screenshot | Purpose |
+|------------|---------|
+| ![Telemetry dashboard](docs/images/websocket-dashboard.png) | Live ground-station dashboard |
+| ![System status](docs/images/system-status.png) | Health and telemetry status panel |
+| ![Architecture overview](docs/images/architecture.png) | System-level architecture snapshot |
+| ![Benchmark summary](docs/images/performance-metrics.png) | Performance metrics proof |
+| ![Test results](docs/images/test-results.png) | Validation snapshot |
+
+### Benchmark Graphs
+
+![Kalman throughput graph](docs/images/backend_perf.svg)
+
+![Encoder/decoder throughput graph](docs/images/decoder_perf.svg)
+
+### Mermaid Diagrams
+
+```mermaid
+flowchart LR
+  A[Flight Computer] --> B[XBee Link]
+  B --> C[FastAPI Backend]
+  C --> D[Telemetry Decoder]
+  D --> E[Kalman Filter]
+  E --> F[Flight State Machine]
+  F --> G[WebSocket Broadcast]
+  G --> H[React Dashboard]
+```
+
+```mermaid
+sequenceDiagram
+  participant FC as Flight Computer
+  participant RX as Ground Receiver
+  participant API as Backend API
+  participant UI as Dashboard
+
+  FC->>RX: 46-byte telemetry packet
+  RX->>API: serial frame
+  API->>API: decode + validate + filter
+  API->>UI: broadcast JSON telemetry
+  UI->>UI: render charts and status cards
+```
 
 ---
 
