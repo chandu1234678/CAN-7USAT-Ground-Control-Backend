@@ -225,14 +225,15 @@ class MockDataGenerator:
             callback: Async function to call with each packet (bytes)
         """
         self.running = True
-        self.start_time = asyncio.get_event_loop().time()
+        loop = asyncio.get_running_loop()
+        self.start_time = loop.time()
         
         logger.info("Mock data generator started")
         
         try:
             while self.running:
                 # Calculate elapsed time
-                current_time = asyncio.get_event_loop().time()
+                current_time = loop.time()
                 elapsed_time = current_time - self.start_time
                 
                 # Generate packet
@@ -247,8 +248,8 @@ class MockDataGenerator:
         except asyncio.CancelledError:
             logger.info("Mock data generator cancelled")
             self.running = False
-        except Exception as e:
-            logger.error(f"Mock data generator error: {e}")
+        except Exception as exc:
+            logger.error(f"Mock data generator error: {exc}")
             self.running = False
     
     def stop(self):

@@ -51,7 +51,7 @@ class FlightStateMachine:
     
     def __init__(
         self,
-        apogee_deploy_altitude: float = None,  # Deploy at apogee
+        apogee_deploy_altitude: Optional[float] = None,  # Deploy at apogee
         main_deploy_altitude: float = 600.0,   # Secondary at 600m AGL
         liftoff_accel_threshold: float = 20.0,  # m/s² (2G)
         liftoff_altitude_threshold: float = 5.0,  # meters
@@ -284,8 +284,8 @@ class FlightStateMachine:
         for callback in self.event_callbacks[event]:
             try:
                 callback(event)
-            except Exception as e:
-                logger.error(f"Event callback error: {e}")
+            except Exception as exc:
+                logger.error(f"Event callback error: {exc}")
     
     def _log_event(self, event: FlightEvent, details: str, timestamp: datetime):
         """Log flight event"""
