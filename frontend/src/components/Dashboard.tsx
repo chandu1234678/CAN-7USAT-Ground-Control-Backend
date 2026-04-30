@@ -14,7 +14,10 @@ export const Dashboard = () => {
   const [uptime, setUptime] = useState(0);
   const [armed, setArmed] = useState(false);
 
-  useEffect(() => { connect(WS_URL); return () => disconnect(); }, []);
+  useEffect(() => {
+    connect(WS_URL);
+    return () => disconnect();
+  }, [connect, disconnect]);
   useEffect(() => {
     const t = setInterval(() => setUptime(p => p + 1), 1000);
     return () => clearInterval(t);

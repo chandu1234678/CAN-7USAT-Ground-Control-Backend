@@ -35,7 +35,7 @@ export const TelemetryChart: React.FC<TelemetryChartProps> = ({
         x: {
           time: false,
           // Always start from 0 - show full history
-          range: (_u, _min, _max) => [0, Math.max(times[times.length - 1] ?? 1, 1)],
+          range: () => [0, Math.max(times[times.length - 1] ?? 1, 1)],
         },
         y: { auto: true },
       },

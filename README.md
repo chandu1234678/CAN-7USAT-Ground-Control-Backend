@@ -239,3 +239,13 @@ MIT — see [LICENSE](LICENSE)
 ---
 
 *Inspired by BPS.space, Lafayette Systems GCS, rckTom/alturia-firmware, trentrand/rocket-flight-computer*
+
+---
+
+## Performance Report
+
+We maintain a reproducible performance report and high-quality graphs under `docs/PERFORMANCE.md`.
+Run `backend/benchmarks/run_benchmarks.py` to regenerate SVGs into `docs/images/` and consult
+`docs/PERFORMANCE.md` for methodology, results, and interpretation.
+
+See: [docs/PERFORMANCE.md](docs/PERFORMANCE.md)
