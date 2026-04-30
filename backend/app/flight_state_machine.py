@@ -1,10 +1,3 @@
-"""
-Advanced Flight State Machine with Safety Features
-Inspired by production rocket flight computers:
-- BPS.space Falcon Heavy
-- rckTom/alturia-firmware
-- SparkyVT/HPR-Rocket-Flight-Computer
-"""
 
 import logging
 from enum import IntEnum
@@ -15,7 +8,6 @@ logger = logging.getLogger(__name__)
 
 
 class FlightState(IntEnum):
-    """Flight state enumeration"""
     PRE_FLIGHT = 0
     BOOST = 1
     COAST = 2
@@ -25,7 +17,6 @@ class FlightState(IntEnum):
 
 
 class FlightEvent(IntEnum):
-    """Flight events for logging"""
     POWER_ON = 0
     ARMED = 1
     LIFTOFF = 2
@@ -38,16 +29,6 @@ class FlightEvent(IntEnum):
 
 
 class FlightStateMachine:
-    """
-    Production-grade flight state machine with safety features
-    
-    Features:
-    - Mach-immune apogee detection
-    - Tilt-sensing safety lockouts
-    - Redundant event detection
-    - Configurable deployment altitudes
-    - Event logging and telemetry
-    """
     
     def __init__(
         self,

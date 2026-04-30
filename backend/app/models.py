@@ -19,10 +19,6 @@ class FlightState(IntEnum):
 
 
 class TelemetryPacket(BaseModel):
-    """
-    46-byte telemetry packet structure
-    Matches the embedded C++ struct exactly
-    """
     model_config = ConfigDict(json_schema_extra={
         "example": {
             "sync_byte": 170,
@@ -40,24 +36,21 @@ class TelemetryPacket(BaseModel):
         }
     })
     
-    sync_byte: int = Field(default=0xAA, ge=0, le=255, description="Sync byte (0xAA)")
-    timestamp_ms: int = Field(..., ge=0, description="Milliseconds since boot")
-    flight_state: FlightState = Field(..., description="Current flight state")
-    altitude_m: float = Field(..., description="Barometric altitude AGL (meters)")
-    velocity_ms: float = Field(..., description="Vertical velocity (m/s)")
-    quat_w: float = Field(..., description="Quaternion W component")
-    quat_x: float = Field(..., description="Quaternion X component")
-    quat_y: float = Field(..., description="Quaternion Y component")
-    quat_z: float = Field(..., description="Quaternion Z component")
-    gps_lat: float = Field(..., description="GPS Latitude (degrees)")
-    gps_lon: float = Field(..., description="GPS Longitude (degrees)")
-    checksum_xor: int = Field(..., ge=0, le=255, description="XOR checksum")
-    
-    # Metadata (not in binary packet)
-    received_at: Optional[datetime] = Field(default=None, description="Server receive timestamp")
+    sync_byte: int = Field(default=0xAA, ge=0, le=255)
+    timestamp_ms: int = Field(..., ge=0)
+    flight_state: FlightState
+    altitude_m: float
+    velocity_ms: float
+    quat_w: float
+    quat_x: float
+    quat_y: float
+    quat_z: float
+    gps_lat: float
+    gps_lon: float
+    checksum_xor: int = Field(..., ge=0, le=255)
+    received_at: Optional[datetime] = None
     
     def to_dict(self) -> dict:
-        """Convert to dictionary for JSON serialization"""
         return {
             "sync_byte": self.sync_byte,
             "timestamp_ms": self.timestamp_ms,
@@ -77,23 +70,17 @@ class TelemetryPacket(BaseModel):
 
 
 class SystemStatus(BaseModel):
-    """System health and diagnostics"""
-    connected: bool = Field(..., description="Serial connection status")
-    packets_received: int = Field(default=0, description="Total packets received")
-    packets_dropped: int = Field(default=0, description="Corrupted packets dropped")
-    last_packet_time: Optional[datetime] = Field(default=None, description="Last packet timestamp")
-    websocket_clients: int = Field(default=0, description="Connected WebSocket clients")
-    uptime_seconds: float = Field(default=0.0, description="Server uptime")
+    connected: bool
+    packets_received: int = 0
+    packets_dropped: int = 0
+    last_packet_time: Optional[datetime] = None
+    websocket_clients: int = 0
+    uptime_seconds: float = 0.0
 
 
 class CommandRequest(BaseModel):
-    """Command to send to rocket (uplink)"""
     model_config = ConfigDict(json_schema_extra={
-        "example": {
-            "command": "ARM",
-            "parameters": {"timeout": 300}
-        }
+        "example": {"command": "ARM", "parameters": {"timeout": 300}}
     })
-    
-    command: str = Field(..., description="Command name")
-    parameters: Optional[dict] = Field(default=None, description="Command parameters")
+    command: str
+    parameters: Optional[dict] = None

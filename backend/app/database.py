@@ -1,7 +1,3 @@
-"""
-Database module for telemetry storage
-Async PostgreSQL support with SQLAlchemy
-"""
 
 import logging
 from typing import Optional, List
@@ -18,7 +14,6 @@ Base = declarative_base()
 
 
 class TelemetryRecord(Base):
-    """Database model for telemetry packets"""
     __tablename__ = "telemetry"
     
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -40,15 +35,8 @@ class TelemetryRecord(Base):
 
 
 class DatabaseManager:
-    """Manages database connections and operations"""
     
     def __init__(self, database_url: Optional[str] = None):
-        """
-        Initialize database manager
-        
-        Args:
-            database_url: PostgreSQL connection URL (optional, uses settings if not provided)
-        """
         self.database_url = database_url or settings.database_url
         self.engine = None
         self.session_maker = None
@@ -60,7 +48,6 @@ class DatabaseManager:
             logger.info("Database disabled (no DATABASE_URL configured)")
     
     async def initialize(self):
-        """Initialize database connection and create tables"""
         if not self.enabled:
             return
         

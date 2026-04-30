@@ -1,14 +1,4 @@
-"""Benchmark harness for Kalman filter and telemetry encoder/decoder.
-
-Produces SVG graphs under docs/images/:
- - backend_perf.svg   (Kalman throughput)
- - decoder_perf.svg   (encoder/decoder roundtrip throughput)
-
-Usage:
-    python backend/benchmarks/run_benchmarks.py
-
-This script is intentionally lightweight and uses matplotlib for plotting.
-"""
+"""Benchmark harness for Kalman filter and decoder."""
 
 from pathlib import Path
 import sys

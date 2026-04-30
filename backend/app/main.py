@@ -29,28 +29,20 @@ logger = logging.getLogger(__name__)
 
 
 class ConnectionManager:
-    """Manages WebSocket connections and broadcasts"""
-    
     def __init__(self):
         self.active_connections: List[WebSocket] = []
         self.packets_sent = 0
     
     async def connect(self, websocket: WebSocket):
-        """Accept new WebSocket connection"""
         await websocket.accept()
         self.active_connections.append(websocket)
         logger.info(f"WebSocket client connected. Total clients: {len(self.active_connections)}")
     
     def disconnect(self, websocket: WebSocket):
-        """Remove WebSocket connection"""
         self.active_connections.remove(websocket)
         logger.info(f"WebSocket client disconnected. Total clients: {len(self.active_connections)}")
     
     async def broadcast(self, message: dict):
-        """
-        Broadcast message to all connected clients
-        Removes dead connections automatically
-        """
         dead_connections = []
         
         for connection in self.active_connections:
@@ -80,12 +72,6 @@ MAX_HISTORY = 1000  # Keep last 1000 packets in memory
 
 
 async def process_telemetry_packet(packet_bytes: bytes):
-    """
-    Process incoming telemetry packet and broadcast to WebSocket clients
-    
-    Args:
-        packet_bytes: 46-byte binary telemetry packet
-    """
     global latest_packet
     
     # Decode packet
@@ -117,7 +103,6 @@ async def process_telemetry_packet(packet_bytes: bytes):
 
 
 async def start_mock_telemetry():
-    """Start mock telemetry generator"""
     global mock_generator, telemetry_task
     
     if settings.mock_mode:
@@ -132,7 +117,6 @@ async def start_mock_telemetry():
 
 
 async def stop_mock_telemetry():
-    """Stop mock telemetry generator"""
     global mock_generator, telemetry_task
     
     if mock_generator:
@@ -148,7 +132,6 @@ async def stop_mock_telemetry():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Application lifespan manager"""
     # Startup
     logger.info("=" * 60)
     logger.info("GITAM CAN-7USAT Ground Control Station")

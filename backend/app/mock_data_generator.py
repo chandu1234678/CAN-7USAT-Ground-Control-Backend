@@ -1,7 +1,3 @@
-"""
-Mock telemetry data generator for testing without hardware
-Simulates realistic flight profile based on rckt_kushinagar.csv
-"""
 
 import asyncio
 import math
@@ -14,18 +10,8 @@ logger = logging.getLogger(__name__)
 
 
 class MockDataGenerator:
-    """
-    Generates realistic telemetry data simulating a rocket flight
-    Based on OpenRocket simulation data from rckt_kushinagar.csv
-    """
     
     def __init__(self, data_rate_hz: int = 10):
-        """
-        Initialize mock data generator
-        
-        Args:
-            data_rate_hz: Telemetry generation rate in Hz
-        """
         self.data_rate_hz = data_rate_hz
         self.interval_sec = 1.0 / data_rate_hz
         
@@ -49,15 +35,6 @@ class MockDataGenerator:
         logger.info(f"Mock data generator initialized at {data_rate_hz} Hz")
     
     async def generate_packet(self, elapsed_time: float) -> bytes:
-        """
-        Generate a single telemetry packet for given flight time
-        
-        Args:
-            elapsed_time: Time since launch in seconds
-            
-        Returns:
-            46-byte binary telemetry packet
-        """
         # Determine flight state
         flight_state = self._get_flight_state(elapsed_time)
         

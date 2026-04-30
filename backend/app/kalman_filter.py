@@ -1,8 +1,3 @@
-"""
-Kalman Filter for sensor fusion (Barometer + Accelerometer)
-Inspired by BPS.space and alturia-firmware implementations
-Provides optimal altitude and velocity estimation
-"""
 
 import numpy as np
 from typing import Tuple
@@ -12,18 +7,6 @@ logger = logging.getLogger(__name__)
 
 
 class KalmanFilter:
-    """
-    1D Kalman Filter for altitude and velocity estimation
-    Fuses barometric altitude with accelerometer data
-    
-    State vector: [altitude, velocity]
-    Measurements: [barometric_altitude, acceleration]
-    
-    Based on implementations from:
-    - BPS.space Falcon Heavy flight computer
-    - rckTom/alturia-firmware
-    - CATS (Control and Telemetry Systems)
-    """
     
     def __init__(
         self,
@@ -33,16 +16,6 @@ class KalmanFilter:
         initial_altitude: float = 0.0,
         initial_velocity: float = 0.0
     ):
-        """
-        Initialize Kalman Filter
-        
-        Args:
-            process_noise: Process noise covariance (Q)
-            measurement_noise_altitude: Barometer measurement noise (R)
-            measurement_noise_accel: Accelerometer measurement noise (R)
-            initial_altitude: Initial altitude estimate (meters)
-            initial_velocity: Initial velocity estimate (m/s)
-        """
         # State vector [altitude, velocity]
         self.x = np.array([[initial_altitude], [initial_velocity]])
         
@@ -71,13 +44,6 @@ class KalmanFilter:
         )
     
     def predict(self, dt: float, acceleration: float):
-        """
-        Prediction step: Update state based on acceleration
-        
-        Args:
-            dt: Time step (seconds)
-            acceleration: Measured acceleration (m/s²)
-        """
         # Remove gravity from acceleration
         accel_vertical = acceleration - self.g
         

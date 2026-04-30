@@ -1,7 +1,4 @@
-"""
-Comprehensive system diagnostics
-Run this to verify all components are working
-"""
+# System diagnostics
 
 import sys
 import struct
@@ -14,13 +11,11 @@ if sys.platform == 'win32':
     sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
 
 def print_header(text):
-    """Print formatted header"""
     print("\n" + "=" * 60)
     print(f"  {text}")
     print("=" * 60 + "\n")
 
 def check_module(name, import_name=None):
-    """Check if a module is installed"""
     import_name = import_name or name
     try:
         module = __import__(import_name)
@@ -32,7 +27,6 @@ def check_module(name, import_name=None):
         return False
 
 def main():
-    """Run diagnostics"""
     print_header("GITAM CAN-7USAT SYSTEM DIAGNOSTICS")
     
     # Python version

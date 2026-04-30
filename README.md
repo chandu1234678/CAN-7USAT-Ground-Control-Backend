@@ -141,8 +141,6 @@ Total: 46 bytes
 
 ## Proof & Validation
 
-This repository is not just documented; it is exercised and measured.
-
 | Area | Evidence |
 |------|----------|
 | Backend tests | 23/23 passing in the current local verification run |
@@ -152,8 +150,6 @@ This repository is not just documented; it is exercised and measured.
 | Backend benchmarks | SVG graphs generated in `docs/images/` |
 
 ### Visual Evidence
-
-These screenshots and charts are included directly from the repo so the README doubles as a lightweight report.
 
 | Screenshot | Purpose |
 |------------|---------|

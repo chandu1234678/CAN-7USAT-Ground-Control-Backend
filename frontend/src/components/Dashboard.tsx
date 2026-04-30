@@ -42,7 +42,6 @@ export const Dashboard = () => {
 
   return (
     <div className="gcs">
-      {/* ── HEADER ── */}
       <header className="gcs-header">
         <div className="gcs-header-left">
           <span style={{fontSize:'1.6rem'}}>🚀</span>
@@ -71,10 +70,9 @@ export const Dashboard = () => {
         </div>
       </header>
 
-      {/* ── BODY ── */}
       <div className="gcs-body">
 
-        {/* ── LEFT ── */}
+
         <div className="col-left">
           {/* Flight State */}
           <div className="panel p-flight">
@@ -148,9 +146,8 @@ export const Dashboard = () => {
           </div>
         </div>
 
-        {/* ── CENTER ── */}
+
         <div className="col-center">
-          {/* Primary Telemetry */}
           <div className="panel p-telem">
             <div className="panel-hdr">Primary Telemetry</div>
             <div className="panel-body" style={{padding:0}}>
@@ -175,7 +172,6 @@ export const Dashboard = () => {
             </div>
           </div>
 
-          {/* Altitude Chart */}
           <div className="panel p-chart">
             <div className="panel-hdr">Altitude Profile</div>
             <div className="panel-body chart-wrap">
@@ -183,7 +179,6 @@ export const Dashboard = () => {
             </div>
           </div>
 
-          {/* Velocity Chart */}
           <div className="panel p-chart">
             <div className="panel-hdr">Velocity Profile</div>
             <div className="panel-body chart-wrap">
@@ -192,9 +187,8 @@ export const Dashboard = () => {
           </div>
         </div>
 
-        {/* ── RIGHT ── */}
+
         <div className="col-right">
-          {/* Vehicle Orientation - Exact Stitch Rocket */}
           <div className="panel p-orient">
             <div className="panel-hdr">Vehicle Orientation</div>
             <div className="panel-body" style={{padding:0}}>
@@ -210,7 +204,6 @@ export const Dashboard = () => {
                   </defs>
                   <rect width="200" height="260" fill="url(#g)"/>
 
-                  {/* ── ROCKET BODY (centered at x=80) ── */}
                   {/* Nose cone */}
                   <polygon points="68,20 92,20 80,5" fill="none" stroke="#00e5ff" strokeWidth="1.8"/>
 
@@ -243,7 +236,6 @@ export const Dashboard = () => {
                   {/* Nozzle */}
                   <polygon points="72,160 88,160 85,170 75,170" fill="none" stroke="#00e5ff" strokeWidth="1.8"/>
 
-                  {/* ── LABELS ── */}
                   <text x="100" y="14"  fill="#00e5ff" fontSize="9" fontFamily="Arial">NOSE</text>
                   <text x="100" y="58"  fill="#00e5ff" fontSize="9" fontFamily="Arial">RECOVERY</text>
                   <text x="100" y="88"  fill="#00e5ff" fontSize="9" fontFamily="Arial">AVIONICS</text>

@@ -1,7 +1,3 @@
-"""
-Binary telemetry packet decoder
-Decodes 46-byte packed struct from Teensy 4.1
-"""
 
 import struct
 import logging
@@ -12,19 +8,6 @@ logger = logging.getLogger(__name__)
 
 
 class TelemetryDecoder:
-    """
-    Decodes binary telemetry packets from the flight computer
-    
-    Packet Structure (46 bytes):
-    - sync_byte (uint8_t): 0xAA
-    - timestamp_ms (uint32_t): Milliseconds since boot
-    - flight_state (uint8_t): 0-5 (PRE_FLIGHT to LANDED)
-    - altitude_m (float): Barometric altitude AGL
-    - velocity_ms (float): Vertical velocity
-    - quat_w, quat_x, quat_y, quat_z (float): Quaternion components
-    - gps_lat, gps_lon (float): GPS coordinates
-    - checksum_xor (uint8_t): XOR of all bytes
-    """
     
     PACKET_SIZE = 46
     SYNC_BYTE = 0xAA
@@ -40,15 +23,6 @@ class TelemetryDecoder:
         self.packets_dropped = 0
     
     def decode(self, raw_bytes: bytes) -> TelemetryPacket | None:
-        """
-        Decode binary packet into TelemetryPacket model
-        
-        Args:
-            raw_bytes: 46-byte binary packet
-            
-        Returns:
-            TelemetryPacket if valid, None if corrupted
-        """
         # Validate packet size
         if len(raw_bytes) != self.PACKET_SIZE:
             logger.warning(f"Invalid packet size: {len(raw_bytes)} (expected {self.PACKET_SIZE})")
